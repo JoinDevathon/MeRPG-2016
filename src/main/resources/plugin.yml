@@ -1,7 +1,7 @@
-name: Devathon Project
-description: A project for the Devathon contest
+name: 3DPrinter
+description: 3D Print models in minecraft!
 version: 1.0.0
-author: Your Name Here
+author: Jaxon Brown
 
 main: org.devathon.contest2016.DevathonPlugin
 
