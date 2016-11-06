@@ -1,4 +1,13 @@
 # Jaxon's Devathon project. 3D Printers in minecraft!
+Welcome! To use the 3D printer, type /buildprinter while in a large (30x30) open and flat space. Be on the ground.
+Next, open the chest (you might need to access it from underneath)and put whatever type of BLOCK you want the printer to build with. Add a few stacks.
+Next, run /print <filename.json>. You can also use a demo file, torus.json. "/print torus.json"
+Note that this plugin is by no means a finished product, I'm just too tired to finish it tonight.
+If you want to reset the printer, I recommend restarting the server (the armor stands will disappear).
+
+### Have fun!
+
+## Time start to finish: 9 hours
 
 # Devathon Project
 This is the base layout for your Devathon Project. It includes several scripts to make running incredibly easy on Windows, Mac, and Linux.

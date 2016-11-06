@@ -6,5 +6,5 @@ author: Jaxon Brown
 main: org.devathon.contest2016.DevathonPlugin
 
 commands:
-  test:
-  test1:
+  buildprinter:
+  print:

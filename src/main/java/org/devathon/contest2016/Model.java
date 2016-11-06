@@ -46,6 +46,10 @@ public abstract class Model {
         this.stands = null;
     }
 
+    public Location getLocation() {
+        return this.currentLocation.clone();
+    }
+
     public void moveTo(Location location) {
         this.currentLocation = location;
         this.stands.forEach(stand -> {

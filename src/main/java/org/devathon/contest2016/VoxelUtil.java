@@ -1,5 +1,6 @@
 package org.devathon.contest2016;
 
+import com.google.common.collect.Lists;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -9,6 +10,8 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Jaxon A Brown
@@ -64,5 +67,33 @@ public class VoxelUtil {
                 }
             }
         }
+    }
+
+    public static List<Location> createVoxelList(Voxel voxel, Location corner) {
+        List<Location> voxels = Lists.newArrayList();
+        World world = corner.getWorld();
+        int xO = corner.getBlockX();
+        int yO = corner.getBlockY();
+        int zO = corner.getBlockZ();
+
+        for(int x = 0; x < voxel.getX(); x++) {
+            for(int y = 0; y < voxel.getY(); y++) {
+                for(int z = 0; z < voxel.getZ(); z++) {
+                    if(voxel.getState(x, y, z)) {
+                        voxels.add(new Location(world, xO + x, yO + y, zO + z));
+                    }
+                }
+            }
+        }
+
+        Comparator<Location> distanceComparator = Comparator.comparing(loc -> loc.distanceSquared(corner));
+        voxels.sort((loc1, loc2) -> {
+            if(loc1.getBlockY() == loc2.getBlockY()) {
+                return distanceComparator.compare(loc1, loc2);
+            } else {
+                return Integer.compare(loc1.getBlockY(), loc2.getBlockY());
+            }
+        });
+        return voxels;
     }
 }

@@ -32,6 +32,8 @@ public class StandEntity extends EntityArmorStand {
     private boolean small;
     private Model.PartData partData;
 
+    private StandTracker tracker;
+
     public StandEntity(Location location, Model.PartData partData) {
         super(((CraftWorld) location.getWorld()).getHandle());
 
@@ -56,7 +58,7 @@ public class StandEntity extends EntityArmorStand {
 
         this.world.getChunkAt(MathHelper.floor(locX / 16.0D), MathHelper.floor(locZ / 16.0D)).a(this);
         this.world.entityList.add(this);
-        StandTracker tracker = new StandTracker(this);
+        tracker = new StandTracker(this);
         try {
             ((Set) cField.get(((WorldServer) this.world).getTracker())).add(tracker);
         } catch(Exception ex) {
@@ -76,5 +78,11 @@ public class StandEntity extends EntityArmorStand {
 
     public Model.PartData getPartData() {
         return this.partData;
+    }
+
+    @Override
+    public void die() {
+        super.die();
+        tracker.broadcast(new PacketPlayOutEntityDestroy(getId()));
     }
 }
