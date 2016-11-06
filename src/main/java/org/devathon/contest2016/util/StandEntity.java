@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
+import org.devathon.contest2016.Model;
 
 import java.lang.reflect.Field;
 import java.util.Set;
@@ -28,8 +29,13 @@ public class StandEntity extends EntityArmorStand {
         }
     }
 
-    public StandEntity(Location location) {
+    private boolean small;
+    private Model.PartData partData;
+
+    public StandEntity(Location location, Model.PartData partData) {
         super(((CraftWorld) location.getWorld()).getHandle());
+
+        this.partData = partData;
 
         this.setBasePlate(false);
         this.setArms(false);
@@ -37,8 +43,9 @@ public class StandEntity extends EntityArmorStand {
         this.setSilent(true);
         this.setNoGravity(true);
         this.setCustomNameVisible(false);
+        this.setSmall(this.small = partData.small);
 
-        setPosition(location.getX(), location.getY(), location.getZ());
+        moveTo(location);
 
         try {
             bBField.set(this, 2039583);
@@ -59,11 +66,15 @@ public class StandEntity extends EntityArmorStand {
     }
 
     public void setItem(ItemStack stack) {
-        ((ArmorStand) this).setHelmet(stack);
+        ((ArmorStand) getBukkitEntity()).setHelmet(stack);
     }
 
     public void moveTo(Location location) {
-        this.setPosition(location.getX(), location.getY(), location.getZ());
+        this.setPosition(location.getX(), location.getY() - (small ? .68 : 1.38), location.getZ());
         this.setHeadPose(new Vector3f(location.getPitch(), location.getYaw(), 0));
+    }
+
+    public Model.PartData getPartData() {
+        return this.partData;
     }
 }

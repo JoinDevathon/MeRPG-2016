@@ -7,3 +7,4 @@ main: org.devathon.contest2016.DevathonPlugin
 
 commands:
   test:
+  test1:

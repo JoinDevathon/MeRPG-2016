@@ -3,8 +3,6 @@ package org.devathon.contest2016;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DevathonPlugin extends JavaPlugin {
-    public static final double SIZE_NORMAL_HEAD = 0.4165;//TODO I think....
-
     private static DevathonPlugin instance;
     public static DevathonPlugin getInstance() { return instance; }
 
@@ -13,6 +11,7 @@ public class DevathonPlugin extends JavaPlugin {
         instance = this;
 
         getCommand("test").setExecutor(new TestCommand());
+        getCommand("test1").setExecutor(new TestCommand1());
     }
 
     @Override
